@@ -2,8 +2,6 @@ package com.gxd523.mvvm
 
 import android.app.Activity
 import android.os.Bundle
-import com.gxd523.mvvm.model.impl.DatabaseModel
-import com.gxd523.mvvm.model.impl.NetworkModel
 
 class MainActivity : Activity() {
     private val mainViewModel = MainViewModel()
@@ -12,9 +10,9 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        NetworkModel()
-        DatabaseModel()
         mainViewModel.networkModel.get("http://www.baidu.com/").let(::println)
         mainViewModel.databaseModel.query("select * from user").let(::println)
+        mainViewModel.spModel.get("a", false).let(::println)
+        mainViewModel.spModel2.get("b", 33).let(::println)
     }
 }
