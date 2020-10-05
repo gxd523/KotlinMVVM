@@ -2,8 +2,8 @@ package com.gxd523.mvvm
 
 import android.app.Activity
 import android.os.Bundle
-import com.gxd523.mvvm.model.DatabaseModel
-import com.gxd523.mvvm.model.NetworkModel
+import com.gxd523.mvvm.model.impl.DatabaseModel
+import com.gxd523.mvvm.model.impl.NetworkModel
 
 class MainActivity : Activity() {
     private val mainViewModel = MainViewModel()

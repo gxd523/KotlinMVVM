@@ -1,7 +1,7 @@
 package com.gxd523.mvvm
 
-import com.gxd523.mvvm.model.DatabaseModel
-import com.gxd523.mvvm.model.NetworkModel
+import com.gxd523.mvvm.model.impl.DatabaseModel
+import com.gxd523.mvvm.model.impl.NetworkModel
 import com.gxd523.mvvm.model.modelOf
 
 /**
