@@ -1,13 +1,11 @@
 buildscript {
-    val kotlin_version by extra("1.4.10")
     repositories {
         google()
         jcenter()
     }
     dependencies {
-        val kotlinVersion = "1.4.10"
-        classpath("com.android.tools.build:gradle:4.1.0")
-        classpath(kotlin("gradle-plugin", version = kotlinVersion))
+        classpath("com.android.tools.build:gradle:4.1.1")
+        classpath(kotlin("gradle-plugin", version = "1.4.21"))
     }
 }
 

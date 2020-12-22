@@ -3,17 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gxd523.mvvm">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".MyApplication"
         android:icon="@android:mipmap/sym_def_app_icon"
         android:label="mvvm"
-        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
-        <activity android:name=".MainActivity">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+        <activity android:name=".splash.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.MainActivity" />
     </application>
+
 </manifest>
