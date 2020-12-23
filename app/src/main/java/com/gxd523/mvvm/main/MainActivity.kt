@@ -25,13 +25,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 is LoadState.Fail -> {
                     button.isEnabled = true
-                    Toast.makeText(this, it.msg, Toast.LENGTH_SHORT).show()
                 }
                 is LoadState.Loading -> {
                     button.isEnabled = false
                 }
             }
-
+            it.msg.takeIf { msg ->
+                msg.trim() != ""
+            }?.let { msg ->
+                Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+            }
         })
 
         viewModel.imageList.observe(this, {

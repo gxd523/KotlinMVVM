@@ -1,4 +1,2 @@
-include(":bean")
-include(":model")
 rootProject.name = "KotlinMVVM"
-include(":app")
+include(":app", ":model", ":bean")
