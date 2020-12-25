@@ -1,22 +1,25 @@
 import com.android.build.gradle.internal.api.ApkVariantOutputImpl
+import com.build.plugin.AndroidConfig
+import com.build.plugin.Dependency
 
 plugins {
     id("com.android.application")
+    id("com.build.plugin")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
+    compileSdkVersion(AndroidConfig.compileVersion)
+    buildToolsVersion(AndroidConfig.buildVersion)
 
     defaultConfig {
-        applicationId = "com.gxd523.mvvm"
-        minSdkVersion(19)
-        targetSdkVersion(30)
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = AndroidConfig.applicationId
+        minSdkVersion(AndroidConfig.minVersion)
+        targetSdkVersion(AndroidConfig.targetVersion)
+        versionCode = AndroidConfig.versionCode
+        versionName = AndroidConfig.versionName
     }
     signingConfigs {
         create("release") {
@@ -55,23 +58,21 @@ dependencies {
     implementation(project(mapOf("path" to ":model")))
     implementation(project(mapOf("path" to ":bean")))
     // kotlin
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.3.9")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
+    implementation(Dependency.Kotlin.stdlib)
+    implementation(Dependency.Kotlin.coroutine)
+    implementation(Dependency.Kotlin.coroutineAndroid)
     // jetpack
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.2.0")
-    implementation("androidx.core:core-ktx:1.3.2")
-    implementation("androidx.appcompat:appcompat:1.2.0")
+    implementation(Dependency.AndroidX.Arch.Lifecycle.runtime)
+    implementation(Dependency.AndroidX.Arch.Lifecycle.viewModel)
+    implementation(Dependency.AndroidX.Arch.Lifecycle.liveData)
+    implementation(Dependency.AndroidX.Core.core)
+    implementation(Dependency.AndroidX.Core.appcompat)
     // thirdlib
-    implementation("com.github.bumptech.glide:glide:4.11.0")
-    kapt("com.github.bumptech.glide:compiler:4.11.0")
+    implementation(Dependency.Third.glide)
+    kapt(Dependency.Third.glideCompiler)
 
-    implementation("com.google.code.gson:gson:2.8.6")
-    implementation("com.squareup.okhttp3:okhttp:3.9.1")
+    implementation(Dependency.Third.gson)
+    implementation(Dependency.Third.okhttp)
     // 七牛云DNS优化
-    implementation("com.qiniu:happy-dns:0.2.13")
-//    implementation("com.squareup.retrofit2:retrofit:2.9.0")
-//    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation(Dependency.Third.qiNiuDns)
 }

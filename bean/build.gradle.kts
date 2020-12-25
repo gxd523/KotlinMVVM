@@ -1,18 +1,22 @@
+import com.build.plugin.AndroidConfig
+import com.build.plugin.Dependency
+
 plugins {
     id("com.android.library")
+    id("com.build.plugin")
     kotlin("android")
 }
 
 android {
-    compileSdkVersion(30)
-    buildToolsVersion("30.0.3")
+    compileSdkVersion(AndroidConfig.compileVersion)
+    buildToolsVersion(AndroidConfig.buildVersion)
 
     defaultConfig {
-        minSdkVersion(19)
-        targetSdkVersion(30)
+        minSdkVersion(AndroidConfig.minVersion)
+        targetSdkVersion(AndroidConfig.targetVersion)
     }
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.4.21")
+    implementation(Dependency.Kotlin.stdlib)
 }
