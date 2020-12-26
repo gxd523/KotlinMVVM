@@ -1,4 +1,4 @@
-package com.gxd523.mvvm.main
+package com.gxd523.mvvm.ui.main
 
 import android.os.Bundle
 import android.widget.Toast

@@ -1,11 +1,11 @@
-package com.gxd523.mvvm.splash
+package com.gxd523.mvvm.ui.splash
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
-import com.gxd523.mvvm.main.MainActivity
+import com.gxd523.mvvm.ui.main.MainActivity
 
-class SplashActivity : AppCompatActivity() {
+class SplashActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -1,4 +1,4 @@
-package com.gxd523.mvvm.main
+package com.gxd523.mvvm.ui.main
 
 import androidx.lifecycle.MutableLiveData
 import com.gxd523.mvvm.base.BaseViewModel
