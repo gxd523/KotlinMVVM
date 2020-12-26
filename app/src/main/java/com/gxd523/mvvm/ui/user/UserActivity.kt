@@ -13,6 +13,6 @@ class UserActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        activity_user_title_tv.text = localClassName
+        activity_user_title_tv.text = javaClass.simpleName
     }
 }
