@@ -1,5 +1,6 @@
 package com.gxd523.mvvm.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.gxd523.mvvm.R
 import com.gxd523.mvvm.bean.LoadState
+import com.gxd523.mvvm.service.BackgroundService
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -51,6 +53,10 @@ class MainActivity : AppCompatActivity() {
 
         button.setOnClickListener {
             viewModel.getImageList()
+        }
+
+        launchServiceBtn.setOnClickListener {
+            startService(Intent(this, BackgroundService::class.java))
         }
     }
 }

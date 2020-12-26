@@ -33,4 +33,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="refresh" />
+
+    <Button
+        android:id="@+id/launchServiceBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Launch BackgroundService" />
 </LinearLayout>
