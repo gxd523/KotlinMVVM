@@ -61,6 +61,6 @@ class MainActivity : AppCompatActivity() {
         slideConflictBtn.setOnClickListener {
             startActivity(Intent(this, SlideConflictActivity::class.java))
         }
-        launchServiceBtn.post { launchServiceBtn.performClick() }
+        slideConflictBtn.post { slideConflictBtn.performClick() }
     }
 }
