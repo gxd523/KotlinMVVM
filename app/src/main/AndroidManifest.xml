@@ -23,6 +23,7 @@
         </activity>
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.user.UserActivity" />
+        <activity android:name=".ui.list.SlideConflictActivity" />
 
         <service android:name=".service.BackgroundService" />
     </application>

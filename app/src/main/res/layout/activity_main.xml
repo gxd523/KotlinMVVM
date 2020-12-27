@@ -39,4 +39,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Launch BackgroundService" />
+
+    <Button
+        android:id="@+id/slideConflictBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Launch SlideConflictActivity" />
 </LinearLayout>

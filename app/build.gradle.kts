@@ -69,6 +69,7 @@ dependencies {
     implementation(Dependency.AndroidX.Core.appcompat)
     // thirdlib
     implementation(Dependency.Third.glide)
+    implementation(Dependency.AndroidX.Ui.recyclerView)
     kapt(Dependency.Third.glideCompiler)
 
     implementation(Dependency.Third.gson)

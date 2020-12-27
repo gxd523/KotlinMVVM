@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.gxd523.mvvm.R
 import com.gxd523.mvvm.bean.LoadState
 import com.gxd523.mvvm.service.BackgroundService
+import com.gxd523.mvvm.ui.list.SlideConflictActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -54,9 +55,12 @@ class MainActivity : AppCompatActivity() {
         button.setOnClickListener {
             viewModel.getImageList()
         }
-
         launchServiceBtn.setOnClickListener {
             startService(Intent(this, BackgroundService::class.java))
         }
+        slideConflictBtn.setOnClickListener {
+            startActivity(Intent(this, SlideConflictActivity::class.java))
+        }
+        launchServiceBtn.post { launchServiceBtn.performClick() }
     }
 }
