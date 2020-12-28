@@ -21,7 +21,7 @@ class MyAdapter : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
 
     class MyViewHolder(
         parent: ViewGroup,
-        view: RecyclerView = MyRecyclerView("inner", parent.context),
+        view: RecyclerView = RecyclerView(parent.context),
     ) : RecyclerView.ViewHolder(view) {
         init {
             (itemView as RecyclerView).layoutManager = LinearLayoutManager(

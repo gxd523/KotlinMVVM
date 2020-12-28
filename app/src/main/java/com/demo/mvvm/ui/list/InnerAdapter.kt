@@ -23,7 +23,7 @@ class InnerAdapter : RecyclerView.Adapter<InnerAdapter.InnerViewHolder>() {
 
     class InnerViewHolder(
         parent: ViewGroup,
-        view: TextView = MyTextView(parent.context),
+        view: TextView = TextView(parent.context),
     ) : RecyclerView.ViewHolder(view) {
         init {
             (itemView as TextView).textSize = 20f.dp
