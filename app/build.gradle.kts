@@ -52,6 +52,9 @@ android {
             }
         }
     }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
 }
 
 dependencies {
@@ -67,10 +70,13 @@ dependencies {
     implementation(Dependency.AndroidX.Arch.Lifecycle.liveData)
     implementation(Dependency.AndroidX.Core.core)
     implementation(Dependency.AndroidX.Core.appcompat)
+    implementation(Dependency.AndroidX.Ui.constraintLayout)
+    implementation(Dependency.AndroidX.Ui.recyclerView)
+    implementation(Dependency.Fragment.fragmentKtx)
+    implementation(Dependency.AndroidX.Navigation.ui)
     implementation(Dependency.Google.material)
     // thirdlib
     implementation(Dependency.Third.glide)
-    implementation(Dependency.AndroidX.Ui.recyclerView)
     kapt(Dependency.Third.glideCompiler)
 
     implementation(Dependency.Third.gson)
