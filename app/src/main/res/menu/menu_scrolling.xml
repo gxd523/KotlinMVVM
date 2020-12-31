@@ -3,8 +3,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.demo.mvvm.ui.material.ScrollingActivity">
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/action_setting1"
         android:orderInCategory="100"
-        android:title="Settings"
+        android:title="菜单1"
         app:showAsAction="never" />
+    <item
+        android:id="@+id/action_setting2"
+        android:title="菜单2"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_setting3"
+        android:icon="@android:drawable/btn_star_big_on"
+        android:orderInCategory="90"
+        android:title="菜单3"
+        app:showAsAction="always" />
 </menu>

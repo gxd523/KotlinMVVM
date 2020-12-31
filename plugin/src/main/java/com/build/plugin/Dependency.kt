@@ -8,7 +8,7 @@ object Dependency {
 
         object Core {
             const val core = "androidx.core:core-ktx:1.3.2"
-            const val appcompat = "androidx.appcompat:appcompat:1.3.0-alpha01"
+            const val appcompat = "androidx.appcompat:appcompat:1.2.0"
             const val activity = "androidx.activity:activity-ktx:1.1.0"
             const val fragment = "androidx.fragment:fragment-ktx:1.2.5"
         }
