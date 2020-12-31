@@ -28,6 +28,10 @@ object Dependency {
         }
     }
 
+    object Google {
+        const val material = "com.google.android.material:material:1.2.1"
+    }
+
     object Kotlin {
         const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlinVersion}"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutineVersion}"

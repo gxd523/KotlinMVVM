@@ -67,6 +67,7 @@ dependencies {
     implementation(Dependency.AndroidX.Arch.Lifecycle.liveData)
     implementation(Dependency.AndroidX.Core.core)
     implementation(Dependency.AndroidX.Core.appcompat)
+    implementation(Dependency.Google.material)
     // thirdlib
     implementation(Dependency.Third.glide)
     implementation(Dependency.AndroidX.Ui.recyclerView)
