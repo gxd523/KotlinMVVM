@@ -25,10 +25,15 @@
         <activity android:name=".ui.user.UserActivity" />
         <activity android:name=".ui.list.SlideConflictActivity" />
         <activity
-            android:name=".ui.material.ScrollingActivity"
+            android:name=".ui.material.scroll.ScrollingActivity"
             android:label="Scrolling"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.material.drawer.DrawerActivity"
+            android:label="Drawer"
             android:theme="@style/NoActionBar" />
 
         <service android:name=".service.BackgroundService" />
     </application>
+
 </manifest>

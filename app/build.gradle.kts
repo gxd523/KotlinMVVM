@@ -72,8 +72,9 @@ dependencies {
     implementation(Dependency.AndroidX.Core.appcompat)
     implementation(Dependency.AndroidX.Ui.constraintLayout)
     implementation(Dependency.AndroidX.Ui.recyclerView)
-    implementation(Dependency.Fragment.fragmentKtx)
+    implementation(Dependency.AndroidX.Core.fragment)
     implementation(Dependency.AndroidX.Navigation.ui)
+    implementation(Dependency.AndroidX.Navigation.fragment)
     implementation(Dependency.Google.material)
     // thirdlib
     implementation(Dependency.Third.glide)
