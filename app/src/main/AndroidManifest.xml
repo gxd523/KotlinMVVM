@@ -26,7 +26,7 @@
         <activity android:name=".ui.list.SlideConflictActivity" />
         <activity
             android:name=".ui.material.ScrollingActivity"
-            android:label="ScrollingActivity"
+            android:label="Scrolling"
             android:theme="@style/NoActionBar" />
 
         <service android:name=".service.BackgroundService" />
