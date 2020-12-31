@@ -13,10 +13,6 @@
         android:label="mvvm"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".ui.material.ScrollingActivity"
-            android:label="ScrollingActivity"
-            android:theme="@style/NoActionBar" />
-        <activity
             android:name=".ui.splash.SplashActivity"
             android:theme="@style/Splash">
             <intent-filter>
@@ -28,6 +24,10 @@
         <activity android:name=".ui.main.MainActivity" />
         <activity android:name=".ui.user.UserActivity" />
         <activity android:name=".ui.list.SlideConflictActivity" />
+        <activity
+            android:name=".ui.material.ScrollingActivity"
+            android:label="ScrollingActivity"
+            android:theme="@style/NoActionBar" />
 
         <service android:name=".service.BackgroundService" />
     </application>
