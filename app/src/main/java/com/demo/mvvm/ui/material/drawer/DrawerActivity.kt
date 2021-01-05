@@ -8,7 +8,6 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.demo.mvvm.R
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_drawer.*
 
 class DrawerActivity : AppCompatActivity() {
@@ -26,7 +25,7 @@ class DrawerActivity : AppCompatActivity() {
             drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
-        nav_view.setupWithNavController(navController)
+        navigationView.setupWithNavController(navController)
     }
 
     override fun onSupportNavigateUp(): Boolean {
