@@ -1,7 +1,6 @@
 package com.demo.mvvm.ui.material.drawer
 
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -21,28 +20,17 @@ class DrawerActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar
-                .make(view, "Replace with your own action", Snackbar.LENGTH_SHORT)
-                .setAction("Action", null)
-                .show()
-        }
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.containerFragment)
         appBarConfiguration = AppBarConfiguration(
             setOf(R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow),
-            drawer_layout
+            drawerLayout
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         nav_view.setupWithNavController(navController)
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_scrolling, menu)
-        return true
-    }
-
     override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment)
+        val navController = findNavController(R.id.containerFragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 }
