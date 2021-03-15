@@ -76,7 +76,7 @@ class SampleHeaderBehavior(context: Context?, attrs: AttributeSet?) : Coordinato
      */
     private fun canScroll(child: View, scrollY: Int): Boolean =
         if (scrollY > 0 && child.translationY == -child.height.toFloat() && !upReach) false else !downReach
-
+//        if (scrollY > 0) child.translationY > -child.height.toFloat() else downReach
 
     /**
      * 嵌套滑动开始（ACTION_DOWN），确定Behavior是否要监听此次事件
