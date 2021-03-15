@@ -11,7 +11,7 @@ import com.demo.mvvm.util.dp
 /**
  * Created by guoxiaodong on 12/31/20 15:15
  */
-class ScrollingAdapter : RecyclerView.Adapter<ScrollingAdapter.ScrollingViewHolder>() {
+class ScrollingAdapter(private val count: Int = 20) : RecyclerView.Adapter<ScrollingAdapter.ScrollingViewHolder>() {
     class ScrollingViewHolder(
         parent: ViewGroup,
         view: TextView = TextView(parent.context),
@@ -60,6 +60,6 @@ class ScrollingAdapter : RecyclerView.Adapter<ScrollingAdapter.ScrollingViewHold
     }
 
     override fun getItemCount(): Int {
-        return 20
+        return count
     }
 }

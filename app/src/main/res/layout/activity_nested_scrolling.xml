@@ -1,0 +1,22 @@
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:background="#666"
+        android:gravity="center"
+        android:text="Hello World"
+        android:textColor="#FFF"
+        android:textSize="22sp"
+        app:layout_behavior="com.demo.mvvm.ui.coordinator.SampleHeaderBehavior" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/nestedRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="com.demo.mvvm.ui.coordinator.RecyclerViewBehavior" />
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
