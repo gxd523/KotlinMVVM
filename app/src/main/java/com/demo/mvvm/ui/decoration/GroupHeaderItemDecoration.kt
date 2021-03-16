@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ItemDecoration
 import com.demo.mvvm.util.dp
 
+typealias OnDrawItemDecorationListener = (Canvas, Paint, TextPaint, Rect, Int) -> Unit
+
 class GroupHeaderItemDecoration(
     private val tagList: List<String>,
     private val groupHeaderHeight: Int = 40f.dp.toInt(),
@@ -33,6 +35,9 @@ class GroupHeaderItemDecoration(
         }
     }
 
+    /**
+     * 设置Item的偏移量
+     */
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
         if (tagList.isEmpty()) return
@@ -54,16 +59,8 @@ class GroupHeaderItemDecoration(
             val position = parent.getChildAdapterPosition(child)
             // 和getItemOffsets()里的条件判断类似，开始绘制分组的GroupHeader
             if (position == 0 || tagList[position] != tagList[position - 1]) {
-                if (drawItemDecorationListener == null) {
-                    drawDefaultGroupHeader(canvas, parent, child, tagList[position])
-                } else {
-                    drawItemDecorationListener.onDrawGroupHeader(
-                        canvas,
-                        mPaint,
-                        mTextPaint,
-                        getGroupHeaderRect(parent, child),
-                        position)
-                }
+                val rect = getGroupHeaderRect(parent, child)
+                decideGroupHeader(canvas, position, rect)
             }
         }
     }
@@ -71,44 +68,32 @@ class GroupHeaderItemDecoration(
     override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (tagList.isEmpty()) return
 
-        //列表第一个可见的ItemView位置
+        // 列表第一个可见的ItemView位置
         val position = (parent.layoutManager as LinearLayoutManager?)!!.findFirstVisibleItemPosition()
-        val tag = tagList[position]
-        //第一个可见的ItemView
+        // 第一个可见的ItemView
         val view = parent.findViewHolderForAdapterPosition(position)!!.itemView
-        //当前ItemView的data的tag和下一个ItemView的不相等，则代表将要重新绘制悬停的GroupHeader
+        // 当前ItemView的data的tag和下一个ItemView的不相等，则代表将要重新绘制悬停的GroupHeader
         var flag = false
-        if (position + 1 < tagList.size && tag != tagList[position + 1]) {
-            //如果第一个可见ItemView的底部坐标小于groupHeaderHeight，则执行Canvas垂直位移操作
-            if (view.bottom <= groupHeaderHeight) {
+        if (position + 1 < tagList.size && tagList[position] != tagList[position + 1]) {
+            if (view.bottom <= groupHeaderHeight) {// 如果第一个可见ItemView的底部坐标小于groupHeaderHeight，则执行Canvas垂直位移操作
                 canvas.save()
                 flag = true
                 canvas.translate(0f, (view.height + view.top - groupHeaderHeight).toFloat())
             }
         }
-        if (drawItemDecorationListener == null) {
-            drawSuspensionGroupHeader(canvas, parent, tag)
-        } else {
-            drawItemDecorationListener.onDrawSuspensionGroupHeader(
-                canvas,
-                mPaint,
-                mTextPaint,
-                getSuspensionGroupHeaderRect(parent),
-                position)
-        }
+        val rect = getSuspensionGroupHeaderRect(parent)
+        decideGroupHeader(canvas, position, rect)
         if (flag) {
             canvas.restore()
         }
     }
 
-    private fun drawDefaultGroupHeader(canvas: Canvas, parent: RecyclerView, child: View, tag: String) {
-        val rect = getGroupHeaderRect(parent, child)
-        canvas.drawRect(rect, mPaint)
-        val x = rect.left + groupHeaderLeftPadding
-        val bounds = Rect()
-        mTextPaint.getTextBounds(tag, 0, tag.length, bounds)
-        val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
-        canvas.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
+    private fun decideGroupHeader(canvas: Canvas, position: Int, rect: Rect) {
+        if (drawItemDecorationListener == null) {
+            drawDecorationItem(canvas, rect, tagList[position])
+        } else {
+            drawItemDecorationListener.invoke(canvas, mPaint, mTextPaint, rect, position)
+        }
     }
 
     private fun getGroupHeaderRect(parent: RecyclerView, child: View): Rect {
@@ -128,13 +113,12 @@ class GroupHeaderItemDecoration(
         return Rect(left, top, right, bottom)
     }
 
-    private fun drawSuspensionGroupHeader(c: Canvas, parent: RecyclerView, tag: String) {
-        val rect = getSuspensionGroupHeaderRect(parent)
-        c.drawRect(rect, mPaint)
+    fun drawDecorationItem(canvas: Canvas, rect: Rect, tag: String) {
+        canvas.drawRect(rect, mPaint)
         val x = rect.left + groupHeaderLeftPadding
         val bounds = Rect()
         mTextPaint.getTextBounds(tag, 0, tag.length, bounds)
         val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
-        c.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
+        canvas.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
     }
 }

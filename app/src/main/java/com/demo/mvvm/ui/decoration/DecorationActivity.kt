@@ -1,9 +1,13 @@
 package com.demo.mvvm.ui.decoration
 
 import android.app.Activity
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.Rect
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.demo.mvvm.util.dp
 import com.github.promeg.pinyinhelper.Pinyin
 
 /**
@@ -23,7 +27,31 @@ class DecorationActivity : Activity() {
         layoutManager.orientation = LinearLayoutManager.VERTICAL
         recyclerView.layoutManager = layoutManager
 
-        recyclerView.addItemDecoration(GroupHeaderItemDecoration(tagList))
+        val groupHeaderHeight = 40f.dp.toInt()
+        val groupHeaderLeftPadding = 20f.dp.toInt()
+        val groupHeaderItemDecoration = GroupHeaderItemDecoration(
+            tagList, groupHeaderHeight, groupHeaderLeftPadding
+        ) { canvas, paint, textPaint, rect, position ->
+            canvas.drawRect(rect, paint)
+
+            val src = BitmapFactory.decodeResource(resources, android.R.mipmap.sym_def_app_icon, null)
+            val iconHeight = 20f.dp.toInt()
+            val dst = Bitmap.createScaledBitmap(src, iconHeight, iconHeight, true)
+            canvas.drawBitmap(
+                dst,
+                rect.left.toFloat() + groupHeaderLeftPadding,
+                (rect.top + (groupHeaderHeight - iconHeight) / 2).toFloat(),
+                paint
+            )
+
+            val tag = tagList[position]
+            val x = rect.left + groupHeaderLeftPadding + iconHeight + 10f.dp
+            val bounds = Rect()
+            textPaint.getTextBounds(tag, 0, tag.length, bounds)
+            val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
+            canvas.drawText(tag, x, y.toFloat(), textPaint)
+        }
+        recyclerView.addItemDecoration(groupHeaderItemDecoration)
         recyclerView.addItemDecoration(DivideItemDecoration(tagList))
     }
 
