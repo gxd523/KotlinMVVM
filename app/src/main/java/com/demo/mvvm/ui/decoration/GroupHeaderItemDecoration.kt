@@ -39,7 +39,6 @@ class GroupHeaderItemDecoration(
      * 设置Item的偏移量
      */
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        super.getItemOffsets(outRect, view, parent, state)
         if (tagList.isEmpty()) return
 
         val manager = parent.layoutManager
@@ -113,7 +112,7 @@ class GroupHeaderItemDecoration(
         return Rect(left, top, right, bottom)
     }
 
-    fun drawDecorationItem(canvas: Canvas, rect: Rect, tag: String) {
+    private fun drawDecorationItem(canvas: Canvas, rect: Rect, tag: String) {
         canvas.drawRect(rect, mPaint)
         val x = rect.left + groupHeaderLeftPadding
         val bounds = Rect()

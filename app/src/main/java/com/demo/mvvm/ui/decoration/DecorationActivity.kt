@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.demo.mvvm.util.dp
 import com.github.promeg.pinyinhelper.Pinyin
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * Created by guoxiaodong on 3/16/21 10:17
@@ -37,12 +39,9 @@ class DecorationActivity : Activity() {
             val src = BitmapFactory.decodeResource(resources, android.R.mipmap.sym_def_app_icon, null)
             val iconHeight = 20f.dp.toInt()
             val dst = Bitmap.createScaledBitmap(src, iconHeight, iconHeight, true)
-            canvas.drawBitmap(
-                dst,
-                rect.left.toFloat() + groupHeaderLeftPadding,
-                (rect.top + (groupHeaderHeight - iconHeight) / 2).toFloat(),
-                paint
-            )
+            val left = rect.left.toFloat() + groupHeaderLeftPadding
+            val top = rect.top + (groupHeaderHeight - iconHeight) / 2
+            canvas.drawBitmap(dst, left, top.toFloat(), paint)
 
             val tag = tagList[position]
             val x = rect.left + groupHeaderLeftPadding + iconHeight + 10f.dp
@@ -51,6 +50,7 @@ class DecorationActivity : Activity() {
             val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
             canvas.drawText(tag, x, y.toFloat(), textPaint)
         }
+
         recyclerView.addItemDecoration(groupHeaderItemDecoration)
         recyclerView.addItemDecoration(DivideItemDecoration(tagList))
     }
@@ -61,7 +61,7 @@ class DecorationActivity : Activity() {
             .onEach { data ->// 生成首字母集合
                 val fist = data.toCharArray()[0]
                 tagList += when {
-                    fist.toString().matches(Regex("[A-Za-z]")) -> fist.toString().toUpperCase()
+                    fist.toString().matches(Regex("[A-Za-z]")) -> fist.toString().toUpperCase(Locale.ROOT)
                     Pinyin.isChinese(fist) -> Pinyin.toPinyin(fist).substring(0, 1)
                     else -> "#"
                 }

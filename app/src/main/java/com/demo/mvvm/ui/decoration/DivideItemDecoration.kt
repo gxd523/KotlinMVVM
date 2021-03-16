@@ -21,7 +21,6 @@ class DivideItemDecoration(
     }
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
-        super.getItemOffsets(outRect, view, parent, state)
         if (tagList.isEmpty()) {
             return
         }
