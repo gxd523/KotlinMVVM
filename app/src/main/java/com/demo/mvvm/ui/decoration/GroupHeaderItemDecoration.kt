@@ -41,36 +41,34 @@ class GroupHeaderItemDecoration(
         if (manager is LinearLayoutManager && LinearLayoutManager.VERTICAL != manager.orientation) return
 
         val position = parent.getChildAdapterPosition(view)
-        // ItemView的position==0 或者 当前itemView的data的tag和上一个ItemView的不相等，则为当前itemView设置top 偏移量
         if (position == 0 || tagList[position] != tagList[position - 1]) {
             outRect.set(0, groupHeaderHeight, 0, 0)
         }
     }
 
-    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
-        if (tagList.isEmpty()) {
-            return
-        }
+    override fun onDraw(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        if (tagList.isEmpty()) return
+
         for (i in 0 until parent.childCount) {
-            val view = parent.getChildAt(i)
-            val position = parent.getChildAdapterPosition(view)
-            val tag = tagList[position]
-            //和getItemOffsets()里的条件判断类似，开始绘制分组的GroupHeader
-            if (position == 0 || tag != tagList[position - 1]) {
+            val child = parent.getChildAt(i)
+            val position = parent.getChildAdapterPosition(child)
+            // 和getItemOffsets()里的条件判断类似，开始绘制分组的GroupHeader
+            if (position == 0 || tagList[position] != tagList[position - 1]) {
                 if (drawItemDecorationListener == null) {
-                    drawGroupHeader(c, parent, view, tag)
+                    drawDefaultGroupHeader(canvas, parent, child, tagList[position])
                 } else {
-                    drawItemDecorationListener.onDrawGroupHeader(c,
+                    drawItemDecorationListener.onDrawGroupHeader(
+                        canvas,
                         mPaint,
                         mTextPaint,
-                        getGroupHeaderCoordinate(parent, view),
+                        getGroupHeaderRect(parent, child),
                         position)
                 }
             }
         }
     }
 
-    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+    override fun onDrawOver(canvas: Canvas, parent: RecyclerView, state: RecyclerView.State) {
         if (tagList.isEmpty()) return
 
         //列表第一个可见的ItemView位置
@@ -83,59 +81,60 @@ class GroupHeaderItemDecoration(
         if (position + 1 < tagList.size && tag != tagList[position + 1]) {
             //如果第一个可见ItemView的底部坐标小于groupHeaderHeight，则执行Canvas垂直位移操作
             if (view.bottom <= groupHeaderHeight) {
-                c.save()
+                canvas.save()
                 flag = true
-                c.translate(0f, (view.height + view.top - groupHeaderHeight).toFloat())
+                canvas.translate(0f, (view.height + view.top - groupHeaderHeight).toFloat())
             }
         }
         if (drawItemDecorationListener == null) {
-            drawSuspensionGroupHeader(c, parent, tag)
+            drawSuspensionGroupHeader(canvas, parent, tag)
         } else {
-            drawItemDecorationListener.onDrawSuspensionGroupHeader(c,
+            drawItemDecorationListener.onDrawSuspensionGroupHeader(
+                canvas,
                 mPaint,
                 mTextPaint,
-                getSuspensionGroupHeaderCoordinate(parent),
+                getSuspensionGroupHeaderRect(parent),
                 position)
         }
         if (flag) {
-            c.restore()
+            canvas.restore()
         }
     }
 
-    private fun getGroupHeaderCoordinate(parent: RecyclerView, view: View): IntArray {
-        val params = view.layoutParams as RecyclerView.LayoutParams
-        val left = parent.paddingLeft
-        val right = parent.width - parent.paddingRight
-        val bottom = view.top - params.topMargin
-        val top = bottom - groupHeaderHeight
-        return intArrayOf(left, top, right, bottom)
-    }
-
-    private fun drawGroupHeader(c: Canvas, parent: RecyclerView, view: View, tag: String) {
-        val params = getGroupHeaderCoordinate(parent, view)
-        c.drawRect(params[0].toFloat(), params[1].toFloat(), params[2].toFloat(), params[3].toFloat(), mPaint)
-        val x = params[0] + groupHeaderLeftPadding
+    private fun drawDefaultGroupHeader(canvas: Canvas, parent: RecyclerView, child: View, tag: String) {
+        val rect = getGroupHeaderRect(parent, child)
+        canvas.drawRect(rect, mPaint)
+        val x = rect.left + groupHeaderLeftPadding
         val bounds = Rect()
         mTextPaint.getTextBounds(tag, 0, tag.length, bounds)
-        val y = params[1] + (groupHeaderHeight + bounds.height()) / 2
-        c.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
+        val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
+        canvas.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
     }
 
-    private fun getSuspensionGroupHeaderCoordinate(parent: RecyclerView): IntArray {
+    private fun getGroupHeaderRect(parent: RecyclerView, child: View): Rect {
+        val params = child.layoutParams as RecyclerView.LayoutParams
+        val left = parent.paddingLeft
+        val right = parent.width - parent.paddingRight
+        val bottom = child.top - params.topMargin
+        val top = bottom - groupHeaderHeight
+        return Rect(left, top, right, bottom)
+    }
+
+    private fun getSuspensionGroupHeaderRect(parent: RecyclerView): Rect {
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
         val bottom = groupHeaderHeight
         val top = 0
-        return intArrayOf(left, top, right, bottom)
+        return Rect(left, top, right, bottom)
     }
 
     private fun drawSuspensionGroupHeader(c: Canvas, parent: RecyclerView, tag: String) {
-        val params = getSuspensionGroupHeaderCoordinate(parent)
-        c.drawRect(params[0].toFloat(), params[1].toFloat(), params[2].toFloat(), params[3].toFloat(), mPaint)
-        val x = params[0] + groupHeaderLeftPadding
+        val rect = getSuspensionGroupHeaderRect(parent)
+        c.drawRect(rect, mPaint)
+        val x = rect.left + groupHeaderLeftPadding
         val bounds = Rect()
         mTextPaint.getTextBounds(tag, 0, tag.length, bounds)
-        val y = params[1] + (groupHeaderHeight + bounds.height()) / 2
+        val y = rect.top + (groupHeaderHeight + bounds.height()) / 2
         c.drawText(tag, x.toFloat(), y.toFloat(), mTextPaint)
     }
 }
