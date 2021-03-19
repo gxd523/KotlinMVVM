@@ -25,6 +25,7 @@ object Dependency {
         object Ui {
             const val recyclerView = "androidx.recyclerview:recyclerview:1.1.0"
             const val constraintLayout = "androidx.constraintlayout:constraintlayout:1.1.3"
+            const val viewpager2 = "androidx.viewpager2:viewpager2:1.0.0"
         }
 
         object Navigation {
@@ -39,7 +40,7 @@ object Dependency {
     }
 
     object Kotlin {
-        const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlinVersion}"
+        val stdlib = "org.jetbrains.kotlin:kotlin-stdlib:${Version.kotlinVersion}"
         const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Version.coroutineVersion}"
         const val coroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutineVersion}"
     }
@@ -51,6 +52,7 @@ object Dependency {
         const val gson = "com.google.code.gson:gson:2.8.6"
         const val okhttp = "com.squareup.okhttp3:okhttp:3.9.1"
         const val qiNiuDns = "com.qiniu:happy-dns:0.2.13"
+        const val pinyin = "com.github.promeg:tinypinyin:2.0.3"
     }
 
     object Room {
