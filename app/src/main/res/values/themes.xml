@@ -25,4 +25,14 @@
     </style>
 
     <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="MyTabLayoutStyle" parent="Base.Widget.Design.TabLayout">
+        <item name="tabBackground">@color/_666</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabInlineLabel">true</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabSelectedTextColor">@color/FF0</item>
+        <item name="tabIndicatorColor">@color/_0FF</item>
+        <item name="tabTextColor">@color/FFF</item>
+    </style>
 </resources>
